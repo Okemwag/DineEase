@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -25,6 +25,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Local apps
+    'reservations.apps.ReservationsConfig',
+    'orders.apps.OrdersConfig',
+    'menu.apps.MenuConfig',
+    'users.apps.UsersConfig',
+    
+    # Third party apps
+    'crispy_forms',
+    'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'corsheaders',
+    'drf_yasg',
+    'django_extensions',
+    'debug_toolbar',
+    
 ]
 
 MIDDLEWARE = [
@@ -61,12 +79,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -103,7 +115,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+#STATIC_URL = 'static/'
+STATIC_URL = "/staticfiles/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIR = []
+MEDIA_URL = "/mediafiles/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
