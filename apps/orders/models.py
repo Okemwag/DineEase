@@ -1,8 +1,8 @@
 import uuid
 #from django.utils import timezone
 from django.db import models
-from menu.models import MenuItem
-from accounts.models import Customer
+from apps.menu.models import MenuItem
+from apps.accounts.models import Customer
 
 
 class Order(models.Model):
@@ -10,7 +10,7 @@ class Order(models.Model):
     class OrderStatus(models.TextChoices):
         PENDING = 'pending'
         PROCESSING = 'processing'
-        DELIVERED = 'delivered'
+        COMPLETED = 'completed'
         CANCELLED = 'cancelled'
     
     

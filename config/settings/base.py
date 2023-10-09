@@ -19,7 +19,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -27,21 +27,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Local apps
-    'reservations.apps.ReservationsConfig',
-    'orders.apps.OrdersConfig',
-    'menu.apps.MenuConfig',
-    'users.apps.UsersConfig',
+    'apps.accounts',
+    'apps.analytics',
+    'apps.authentication',
+    'apps.management',
+    'apps.reservations',
+    'apps.orders',
+    'apps.menu',
+    'apps.reviews',
     
     # Third party apps
-    'crispy_forms',
-    'django_filters',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_framework_simplejwt',
-    'corsheaders',
-    'drf_yasg',
-    'django_extensions',
-    'debug_toolbar',
     
 ]
 
@@ -126,3 +121,5 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL="authentication.CustomUser"
