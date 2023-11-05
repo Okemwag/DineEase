@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 LABEL maintainer='gabrielokemwa83@gmail.com'
-LABEL decription="Development image for Nexus Project"
+LABEL decription="Development image for DineEase Project"
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1

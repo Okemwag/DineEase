@@ -4,26 +4,16 @@ services:
   backend:
     build: .
     command: python manage.py runserver 0.0.0.0:8001
-    volumes:
-      - ./backend:/code
     ports:
       - "8001:8001"
     depends_on:
       - db
-  frontend:
-    build: ./client
-    command: npm run dev
-    volumes:
-      - ./client:/app
-    ports:
-      - "3001:3001"
-    depends_on:
-      - backend
+
   db:
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: db
+      POSTGRES_DB: apextech
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
