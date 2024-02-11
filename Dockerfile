@@ -1,37 +1,40 @@
-FROM python:3.11-slim
-
-LABEL maintainer='gabrielokemwa83@gmail.com'
-LABEL decription="Development image for DineEase Project"
+# Pull base image
+FROM python:3.11-alpine
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DJANGO_ENV=development
+ENV PORT 8000
 
-# Set the working directory to /app
+
+LABEL maintainer='gabrielokemwa83@gmail.com'
+LABEL decription="Development image for DineEase Project"
+
+# Install system dependencies specific to Alpine Linux
+RUN apk add --no-cache \
+    gcc \
+    g++ \
+    postgresql-client \
+    binutils \
+    proj-dev
+
+    
+# Create and set work directory called `app`
 WORKDIR /app
 
-# Copy the requirements file into the container at /app
-COPY /requirements.txt /app/
+# Install dependencies
+COPY requirements.txt .
+
+RUN set -ex && \
+    pip install --upgrade pip && \
+    pip install -r /app/requirements.txt 
 
 
+# Copy local project
+COPY . .
 
-RUN python -m venv venv
-ENV PATH="/app/venv/bin:$PATH"
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+# Expose port 8000
+EXPOSE $PORT
 
 
-
-COPY . /app/
-
-
-EXPOSE 8000
-
-
-#RUN python manage.py collectstatic --noinput
-
-
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD python manage.py runserver 0.0.0.0:$PORT
