@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+
+  web:
+    build:
+      context: ./client
+    volumes:
+      - ./client:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+
+
+  db:
+    image: postgres:15
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    ports:
+      - 5434:5432
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 81:80
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
