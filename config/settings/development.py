@@ -3,7 +3,7 @@ from .base import *
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': 'apextech',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
@@ -11,6 +11,10 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
 
 
 AUTH_USER_MODEL = "apps.authentication.CustomUser"

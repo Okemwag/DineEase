@@ -1,0 +1,48 @@
+# setup_environment.yml
+
+---
+- name: Setup environment for Django project
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: Install Docker dependencies
+      apt:
+        name: 
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+      become: true
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: latest
+
+    - name: Install Docker Compose
+      pip:
+        name: docker-compose
+        executable: pip3
+
+    - name: Copy Dockerfile to the server
+      copy:
+        src: Dockerfile
+        dest: /opt/Dockerfile
+
+    - name: Copy docker-compose.yml to the server
+      copy:
+        src: docker-compose.yml
+        dest: /opt/docker-compose.yml
+
+
+

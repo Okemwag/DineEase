@@ -1,6 +1,6 @@
 # Dj-api - backend Django application
 
-dinenv/
+env/
 **/__pycache__/
 !**/migrations/
 *.sqlite3
