@@ -132,6 +132,53 @@ CACHES = {
 }
 
 
-CELERY_TIMEZONE = "Africa/Nairobi"
+RABBITMQ_USER = os.getenv("RABBITMQ_USER", "rabbitmq")
+RABBITMQ_VHOST = ""
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "rabbitmq")
+RABBITMQ_PASSWORD = os.getenv("RABBITMQ_PASSWORD", "rabbitmq")
+RABBITMQ_PORT = os.getenv("RABBITMQ_PORT", "5672")
+RABBITMQ_DEFAULT_URL = (
+    f"amqp://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}/{RABBITMQ_VHOST}"
+)
+RABBITMQ_URL = os.getenv("RABBITMQ_URL", RABBITMQ_DEFAULT_URL)
+
+# CELERY
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-result-backend-settings
+CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", RABBITMQ_URL)
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", "django-db")
+CELERY_CACHE_BACKEND = "django-cache"
+CELERY_RESULT_EXTENDED = True
+CELERY_DISABLE_RATE_LIMITS = True
+CELERY_SEND_TASK_SENT_EVENT = True
+CELERY_RESULT_PERSISTENT = True
+CELERY_IGNORE_RESULT = False
+CELERY_ACCEPT_CONTENT = ["application/json", "application/x-python-serialize"]
+CELERY_TASK_SERIALIZER = "pickle"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_TASK_DEFAULT_QUEUE = "default"
+# Force all queues to be explicitly listed in `CELERY_TASK_QUEUES` to help prevent typos
+CELERY_TASK_CREATE_MISSING_QUEUES = False
+CELERY_TASK_ACKS_LATE = True
+CELERY_TASK_WAIT_TIME_HOURS = 24
+# True - declare DLX for the main queue, False - leave as is
+CELERY_TASK_DEFAULT_QUEUE_DECLARE_DLX = True
+CELERY_BROKER_DLX_EXCHANGE = "DLX"
+CELERY_BROKER_DLX_PREFIX = "dlx"
+CELERY_BROKER_DURABLE = True
+CELERY_BROKER_AUTO_DELETE = False
+CELERY_TASK_ROUTES = {
+    "core.tasks.*": {"queue": "priority", "routing_key": "priority", "priority": 2}
+}
+
+
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+EMAIL_HOST = "smtp.eu.mailgun.org"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "gabrielokemwa83@gmail.com"
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD",HOST_PASSWORD)
+ADMINS = [("Admin", "gabrielokemwa83@gmail.com")]
