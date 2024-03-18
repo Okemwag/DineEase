@@ -1,25 +1,11 @@
 # Pull base image
 FROM python:3.11-alpine
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+
 ENV PORT 8000
 
-
-LABEL maintainer='gabrielokemwa83@gmail.com'
-LABEL decription="Development image for DineEase Project"
-
-# Install system dependencies specific to Alpine Linux
-RUN apk add --no-cache \
-    gcc \
-    g++ \
-    postgresql-client \
-    binutils \
-    proj-dev
-
-    
 # Create and set work directory called `app`
+
 WORKDIR /app
 
 # Install dependencies
@@ -36,5 +22,4 @@ COPY . .
 # Expose port 8000
 EXPOSE $PORT
 
-
-CMD python manage.py runserver 0.0.0.0:$PORT
+ENTRYPOINT ['sh', 'entrypoint.sh']

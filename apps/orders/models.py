@@ -1,8 +1,10 @@
 import uuid
+
 #from django.utils import timezone
 from django.db import models
-from apps.menu.models import MenuItem
+
 from apps.accounts.models import Customer
+from apps.menu.models import MenuItem
 
 
 class Order(models.Model):

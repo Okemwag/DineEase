@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     # Local apps
     'apps.accounts',
     'apps.analytics',
-    'apps.authentication',
+    #'apps.authentication',
     'apps.management',
     'apps.reservations',
     'apps.orders',
@@ -121,7 +121,7 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "authentication.CustomUser"
+AUTH_USER_MODEL = "management.CustomUser"
 
 
 CACHES = {
@@ -175,10 +175,10 @@ CELERY_TASK_ROUTES = {
 }
 
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-EMAIL_HOST = "smtp.eu.mailgun.org"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "gabrielokemwa83@gmail.com"
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD",HOST_PASSWORD)
-ADMINS = [("Admin", "gabrielokemwa83@gmail.com")]
+# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# EMAIL_HOST = "smtp.eu.mailgun.org"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = "info@thetechhut.com"
+# EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD",HOST_PASSWORD)
+# ADMINS = [("Admin", "gabrielokemwa83@gmail.com")]

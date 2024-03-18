@@ -8,6 +8,9 @@ help:
 	@echo "  logs-backend  : View logs for the Django backend"
 	@echo "  logs-frontend : View logs for the Next.js frontend"
 
+build:
+	docker build -t dinease .
+
 run:
 	docker-compose up -d --build
 
