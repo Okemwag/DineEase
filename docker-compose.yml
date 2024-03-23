@@ -32,14 +32,6 @@ services:
     ports:
       - 5434:5432
 
-  nginx:
-    build:
-      context: ./nginx
-      
-    ports:
-      - 81:80
-    depends_on:
-      - backend
 
 volumes:
   postgres_data:

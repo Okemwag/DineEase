@@ -1,13 +1,11 @@
 #Service for orders 
 import json
 
-
 import pika
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django.utils import timezone
-
 
 from .exceptions import OrderException
 from .models import Order, OrderItem

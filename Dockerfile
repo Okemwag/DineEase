@@ -22,4 +22,4 @@ COPY . .
 # Expose port 8000
 EXPOSE $PORT
 
-ENTRYPOINT ['sh', 'entrypoint.sh']
+CMD python manage.py runserver 0.0.0.0:$PORT

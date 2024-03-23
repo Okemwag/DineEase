@@ -26,6 +26,6 @@ logs-backend:
 logs-frontend:
 	docker-compose logs -f frontend
 backend:
-	docker-compose exec backend bash
+	docker-compose exec backend sh
 frontend:
-	docker-compose exec frontend bash
+	docker-compose exec frontend sh

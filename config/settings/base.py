@@ -1,6 +1,20 @@
 import os
 from pathlib import Path
 
+# settings.py
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://f5ebbc3ff3f0c4d4fe9e2919f23bd49f@o4506933502738432.ingest.us.sentry.io/4506933507325952",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,6 +49,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     "debug_toolbar",
+    'rest_framework',
 
 ]
 
@@ -49,6 +64,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 ROOT_URLCONF = 'config.urls'
 
@@ -175,10 +197,10 @@ CELERY_TASK_ROUTES = {
 }
 
 
-# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-# EMAIL_HOST = "smtp.eu.mailgun.org"
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = "info@thetechhut.com"
-# EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD",HOST_PASSWORD)
-# ADMINS = [("Admin", "gabrielokemwa83@gmail.com")]
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_PORT = ""
+# EMAIL_USE_TLS = 
+# EMAIL_HOST_USER = 
+
+ADMINS = [("Admin", "gabrielokemwa83@gmail.com")]
