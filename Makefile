@@ -12,7 +12,7 @@ build:
 	docker build -t dinease .
 
 run:
-	docker-compose up -d --build
+	docker compose up -d --force-recreate
 
 stop:
 	docker-compose down
@@ -20,12 +20,24 @@ stop:
 clean: stop
 	docker-compose down -v --remove-orphans
 
-logs-backend:
+logs:
 	docker-compose logs -f backend
 
-logs-frontend:
-	docker-compose logs -f frontend
+
 backend:
 	docker-compose exec backend sh
-frontend:
-	docker-compose exec frontend sh
+
+migrate:
+	docker compose run --rm backend sh -c "python manage.py makemigrations"
+	docker compose run --rm backend sh -c "python manage.py wait_for_db && python manage.py migrate"
+
+createsuperuser:
+	docker compose run --rm backend sh -c "python manage.py createsuperuser"
+
+install:
+	python3 -m venv env
+	source env/bin/activate
+	pip install -r requirements.txt
+
+
+	

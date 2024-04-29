@@ -9,7 +9,6 @@ from django.utils import timezone
 
 from .exceptions import OrderException
 from .models import Order, OrderItem
-from .serializers import OrderItemSerializer, OrderSerializer
 from .utils import get_order_total
 
 params = pika.URLParameters(settings.RABBITMQ_URL)

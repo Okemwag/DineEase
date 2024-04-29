@@ -4,23 +4,11 @@ services:
   backend:
     build:
       context: .
-    volumes:
-      - .:/code
+    
     ports:
       - 8000:8000
     depends_on:
       - db
-
-
-  web:
-    build:
-      context: ./client
-    volumes:
-      - ./client:/app
-    ports:
-      - 3000:3000
-    depends_on:
-      - backend
 
 
   db:

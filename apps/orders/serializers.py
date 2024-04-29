@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from .models import Order, OrderItem
+from .analytics import get_total_orders, get_daily_orders, get_popular_items
 
 
 class OrderItemSerializer(ModelSerializer):
@@ -44,4 +45,14 @@ class OrderSerializer(ModelSerializer):
         return instance
 
 
+class OrderAnalyticsSerializer(serializers.Serializer):
+    total_orders = serializers.IntegerField(read_only=True)
+    daily_orders = serializers.IntegerField(read_only=True)
+    popular_items = serializers.ListField(read_only=True)
 
+    def to_representation(self, instance):
+        return {
+            "total_orders": get_total_orders(),
+            "daily_orders": get_daily_orders(instance.get("date")),
+            "popular_items": get_popular_items()
+        }
