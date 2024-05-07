@@ -5,6 +5,7 @@ from django.db import models
 
 from apps.accounts.models import Customer
 from apps.menu.models import MenuItem
+from django_tenants.model import TenantMixin
 
 
 class Order(models.Model):

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'apps.accounts',
-    'apps.analytics',
+    
     #'apps.authentication',
     'apps.management',
     'apps.reservations',

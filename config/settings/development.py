@@ -9,7 +9,6 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
         'CONN_MAX_AGE': 10,
-        'ATOMIC_REQUESTS': True,
         'OPTIONS': {
             'isolation_level': 'read committed',
         },
