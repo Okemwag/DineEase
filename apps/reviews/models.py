@@ -1,9 +1,9 @@
-# from django.conf import settings
+from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
-
-# User = settings.AUTH_USER_MODEL
+User = settings.AUTH_USER_MODEL
 
 class RatingField(models.TextChoices):
     VERY_BAD = '1', 'Very Bad'
@@ -13,11 +13,11 @@ class RatingField(models.TextChoices):
     VERY_GOOD = '5', 'Very Good'
 
 class Review(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rater = models.CharField(max_length=100)
-    rating = models.CharField(max_length=1, choices=RatingField.choices)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    rater = models.CharField(max_length=100, default="Anonymous")
+    rating = models.CharField(max_length=1, choices=RatingField.choices, default=RatingField.AVERAGE)
     comment = models.TextField(max_length=100, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

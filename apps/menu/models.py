@@ -1,9 +1,11 @@
 from django.db import models
-from django_tenants.models import DomainMixin, TenantMixin
+# from django_tenants.models import DomainMixin, TenantMixin
 
 # Create your models here.
 
-class MenuItem(TenantMixin):
+  
+
+class MenuItem(models.Model):
     name = models.CharField(max_length=255, primary_key=True,
                             db_index=True,
                             blank=False,

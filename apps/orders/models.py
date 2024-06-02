@@ -1,12 +1,10 @@
 import uuid
-
 #from django.utils import timezone
 from django.db import models
-
-from apps.accounts.models import Customer
 from apps.menu.models import MenuItem
-from django_tenants.model import TenantMixin
+from django.contrib.auth import get_user_model
 
+Customer = get_user_model()
 
 class Order(models.Model):
     

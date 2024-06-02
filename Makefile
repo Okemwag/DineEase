@@ -9,7 +9,7 @@ help:
 	@echo "  logs-frontend : View logs for the Next.js frontend"
 
 build:
-	docker build -t dinease .
+	docker compose build
 
 run:
 	docker compose up -d --force-recreate

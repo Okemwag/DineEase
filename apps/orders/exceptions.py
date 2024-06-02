@@ -1,4 +1,5 @@
 from rest_framework.exceptions import APIException
+from django.core.validators import EmailValidator
 
 
 class OrderException(APIException):

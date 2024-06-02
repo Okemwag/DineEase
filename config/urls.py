@@ -6,7 +6,10 @@ from config.views import cache_stats
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('admin_volt.urls')),
     path('cache/', cache_page(60 * 15)(cache_stats), name='cache_stats'),
     path('api/', include('apps.reviews.urls')),
+    path('api/', include('apps.menu.urls')),
+    path('api/', include('apps.orders.urls')),
 
 ]

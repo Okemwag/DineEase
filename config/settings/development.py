@@ -1,25 +1,50 @@
 from .base import *
 
+#sqlite
 DATABASES = {
     'default': {
-        'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'apextech',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'CONN_MAX_AGE': 10,
-        'OPTIONS': {
-            'isolation_level': 'read committed',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-DATABASE_ROUTERS = (
-    'django_tenants.routers.TenantSyncRouter',
-)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django_tenants.postgresql_backend',
+#         'NAME': 'apextech',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#         'CONN_MAX_AGE': 10,
+#         'OPTIONS': {
+#             'isolation_level': 'read committed',
+#         },
+#     }
+# }
 
-TENANT_MODEL = "tenants.Client"
+# DATABASE_ROUTERS = (
+#     'django_tenants.routers.TenantSyncRouter',
+# )
+
+# TENANT_MODEL = "tenants.Client"
+
+# SHARED_APPS = [
+#     'django_tenants',
+#     'apps.authentication',
+#     'apps.orders',
+#     'apps.menu',
+#     'apps.reviews',
+#     'apps.reservations',
+# ]
+
+# TENANT_APPS = [
+#     'django_tenants',
+#     'apps.accounts',
+#     'apps.management',
+
+# ]
+
 
 
 #AUTH_USER_MODEL = "apps.authentication.CustomUser"
